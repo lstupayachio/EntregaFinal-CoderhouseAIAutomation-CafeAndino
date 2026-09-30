@@ -7,7 +7,7 @@ Sistema que genera publicaciones de LinkedIn para Café Andino, una marca peruan
 
 ## Documentación principal
 
-- **Informe completo (PDF):** [Descargar el informe](https://github.com/lstupayachio/EntregaFinal-CoderhouseAIAutomation-CafeAndino/raw/main/informe/Entrega_Final_Cafe_Andino.pdf)
+- **Informe completo (PDF):** [Descargar el informe](https://github.com/lstupayachio/EntregaFinal-CoderhouseAIAutomation-CafeAndino/raw/main/informe/Entrega_Final_Cafe_Andino.pdf) · [Verlo en línea](https://drive.google.com/file/d/1zSQySqtRfmtNhulnSFdexxFxFPNGCjQg/view?usp=sharing)
 - **Diagrama de arquitectura (PDF):** [Descargar el diagrama](https://github.com/lstupayachio/EntregaFinal-CoderhouseAIAutomation-CafeAndino/raw/main/diagrama/Diagrama_de_Arquitectura_Cafe_Andino.pdf) · [Ver como imagen](diagrama/Diagrama_de_Arquitectura_Cafe_Andino.jpg)
 
 > Si el visor de GitHub muestra el mensaje "Unable to render code block", usa los enlaces de descarga: los archivos están completos y se abren con cualquier lector de PDF.
