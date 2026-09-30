@@ -1,0 +1,122 @@
+{
+  "name": "Café Andino - Registro de errores críticos",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "9b81787a-f1fe-426d-8cfb-0bfa6bdf17c7",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "airtableOAuth2Api",
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "apphPqIraPT0aSqFS",
+          "mode": "list",
+          "cachedResultName": "Cafe Andino - Entrega Final",
+          "cachedResultUrl": "https://airtable.com/apphPqIraPT0aSqFS"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbltNfiN0pBUltCEl",
+          "mode": "list",
+          "cachedResultName": "Registro de Ejecuciones",
+          "cachedResultUrl": "https://airtable.com/apphPqIraPT0aSqFS/tbltNfiN0pBUltCEl"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Tipo": "Error",
+            "Etapa": "={{ $json.execution.lastNodeExecuted }}",
+            "Mensaje": "={{ $json.execution.error.message }}",
+            "Fecha": "={{ $now.toISO() }}"
+          }
+        },
+        "options": {
+          "typecast": true
+        }
+      },
+      "id": "48635745-6633-435f-9e7e-d95ccaa0d5fd",
+      "name": "Registrar error crítico",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        224,
+        0
+      ],
+      "credentials": {
+        "airtableOAuth2Api": {
+          "id": "4K6EYF83qeapSZdu",
+          "name": "Airtable account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "correo.personal@ejemplo.com",
+        "subject": "Error crítico en el flujo de Café Andino",
+        "message": "=<h2>Error crítico en el flujo de Café Andino</h2>\n<p>Se produjo un error crítico durante la ejecución del flujo automatizado.</p>\n<ul>\n  <li><strong>Flujo:</strong> {{ $('Error Trigger').item.json.workflow.name }}</li>\n  <li><strong>Nodo que falló:</strong> {{ $('Error Trigger').item.json.execution.lastNodeExecuted }}</li>\n  <li><strong>Mensaje de error:</strong> {{ $('Error Trigger').item.json.execution.error.message }}</li>\n</ul>\n<p><a href=\"{{ $('Error Trigger').item.json.execution.url }}\">Ver la ejecución en n8n</a></p>",
+        "options": {}
+      },
+      "id": "667a5541-df90-436d-81a9-2dd4a25e5b49",
+      "name": "Alertar al revisor",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        448,
+        0
+      ],
+      "webhookId": "c4280b8d-55e0-4539-a08a-ef4888c83da3",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "31uVtdVCWRMuWJpW",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Registrar error crítico",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Registrar error crítico": {
+      "main": [
+        [
+          {
+            "node": "Alertar al revisor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "5d012bd6-22e2-444c-b698-6f396aa754c0",
+  "meta": {
+    "instanceId": "1802def5b4f4ef639c2a2bd1f869dc525d05b352501355f9024bdb2977bea394"
+  },
+  "nodeGroups": [],
+  "id": "kVU3vHoumVirlriQ",
+  "tags": []
+}
